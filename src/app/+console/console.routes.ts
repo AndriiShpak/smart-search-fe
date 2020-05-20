@@ -29,6 +29,34 @@ export const routes: Routes = [
           import('./+filters/filters.module').then((m) => m.FiltersModule),
         data: childRouteConfiguration,
       },
+      {
+        path: ConsoleRoutesEnum.SETTINGS,
+        loadChildren: () =>
+          import('./+settings/settings.module').then((m) => m.SettingsModule),
+        data: childRouteConfiguration,
+      },
+      {
+        path: ConsoleRoutesEnum.ANALYTICS,
+        loadChildren: () =>
+          import('./+analytics/analytics.module').then(
+            (m) => m.AnalyticsModule
+          ),
+        data: childRouteConfiguration,
+      },
+      {
+        path: ConsoleRoutesEnum.VALIDATIONS,
+        loadChildren: () =>
+          import('./+validations/validations.module').then(
+            (m) => m.ValidationsModule
+          ),
+        data: childRouteConfiguration,
+      },
+      {
+        path: ConsoleRoutesEnum.ACCOUNT,
+        loadChildren: () =>
+          import('./+account/account.module').then((m) => m.AccountModule),
+        data: childRouteConfiguration,
+      },
     ],
   },
 ];

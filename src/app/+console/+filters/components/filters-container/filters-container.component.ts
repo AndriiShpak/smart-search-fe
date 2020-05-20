@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 import { HeaderService } from '../../../services';
+import { FILTER_SECTION } from '../../../console.constants';
 
 @Component({
   selector: 'app-filters-container',
@@ -13,7 +15,7 @@ export class FiltersContainerComponent {
   }
 
   private registerHeader(): void {
-    this.headerService.headerTitle$.next('intents.title');
-    this.headerService.headerIcon$.next('emoji_objects');
+    this.headerService.headerTitle$.next(FILTER_SECTION.text);
+    this.headerService.headerIcon$.next(FILTER_SECTION.icon);
   }
 }

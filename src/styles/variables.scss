@@ -9,6 +9,11 @@ $theme: mat-light-theme(
   $_theme-accent
 );
 
+// Screen sizes
+$min-screen-width: 1200px;
+$max-content-size: 1500px;
+$min-screen-height: 600px;
+
 // Custom variables
 $content-separator: 1px solid #e7e7e7;
 $header-height: 80px;

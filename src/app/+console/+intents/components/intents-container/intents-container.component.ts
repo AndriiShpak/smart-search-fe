@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+
 import { HeaderService } from '../../../services';
 import { INTENTS_SECTION } from '../../../console.constants';
 

@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 *,
 *::before,
 *::after {
@@ -9,4 +11,11 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+body {
+  min-width: $min-screen-width;
+  min-height: $min-screen-height;
+  overflow: auto;
+  position: relative;
 }
