@@ -1,0 +1,24 @@
+.item {
+  &__config-block {
+    margin-bottom: 20px;
+  }
+
+  &__general-config-checkbox {
+    margin-right: 20px;
+  }
+
+  &__item-config-checkbox {
+    margin-left: 20px;
+  }
+
+  &__synonyms-block {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__synonyms-input {
+    flex: 1;
+    margin-left: 30px;
+  }
+}

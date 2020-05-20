@@ -1,0 +1,23 @@
+<div class="item__config-block">
+  <mat-checkbox class="item__general-config-checkbox">Ready for search</mat-checkbox>
+  <mat-checkbox class="item__general-config-checkbox">Required</mat-checkbox>
+</div>
+
+<div *ngFor="let entity of filterItem.entities; let index = index" class="item__synonyms-block">
+  {{ entity.value }}:
+  <mat-form-field class="item__synonyms-input">
+    <mat-chip-list #synonymsList>
+      <mat-chip *ngFor="let synonym of filterItem.entities[index].synonyms" [removable]="true">
+        {{synonym}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Synonyms"
+        [matChipInputFor]="synonymsList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="addSynonym(index, $event)"
+      >
+    </mat-chip-list>
+  </mat-form-field>
+  <mat-checkbox class="item__item-config-checkbox">only synonyms</mat-checkbox>
+</div>

@@ -1,0 +1,20 @@
+@import 'variables.scss';
+
+.list {
+  &__tab-content {
+    padding: 20px;
+  }
+
+  &__search-container {
+    margin-bottom: 10px;
+  }
+
+  &__search-input {
+    width: calc(100% - 60px);
+  }
+
+  &__filter {
+    color: $grey-text;
+    margin-left: 20px;
+  }
+}

@@ -1,0 +1,16 @@
+:host(.last-item) {
+  .item__link {
+    border-bottom-width: 1px;
+  }
+}
+
+.item {
+  &__link {
+    width: 100%;
+    text-align: left;
+    border: 1px solid #ddd;
+    border-bottom-width: 0;
+    min-height: 36px;
+    font-weight: normal;
+  }
+}
