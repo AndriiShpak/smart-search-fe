@@ -1,0 +1,35 @@
+@import 'variables.scss';
+
+@mixin side-content {
+  width: $side-content-width;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.content {
+  &__side-menu {
+    @include side-content;
+    border-right: $content-separator;
+    left: 0;
+  }
+
+  &__try-it {
+    @include side-content;
+    border-left: $content-separator;
+    right: 0;
+  }
+
+  &__header {
+    height: $header-height;
+    position: fixed;
+    top: 0;
+    left: $side-content-width;
+    right: $side-content-width;
+    border-bottom: $content-separator;
+  }
+
+  &__main {
+    padding: $header-height $side-content-width 0 $side-content-width;
+  }
+}

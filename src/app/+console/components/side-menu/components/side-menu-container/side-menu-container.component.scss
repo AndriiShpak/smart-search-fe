@@ -1,0 +1,25 @@
+@import 'variables.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: $grey-background;
+  padding-bottom: 20px;
+}
+
+.menu {
+  &__content {
+    padding-top: 30px;
+  }
+
+  &__divider {
+    height: 1px;
+    background-color: $grey-lighter-text;
+    margin: 10px 30px;
+  }
+
+  &__footer {
+    margin-top: auto;
+  }
+}

@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+
+// Material setup
+$_theme-primary: mat-palette($mat-indigo);
+$_theme-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+$theme: mat-light-theme(
+  $_theme-primary,
+  $_theme-accent
+);
+
+// Custom variables
+$content-separator: 1px solid #e7e7e7;
+$header-height: 80px;
+$side-content-width: 300px;
+
+// Colors definition
+$primary: mat-color(map-get($theme, primary));
+$accent: mat-color(map-get($theme, accent));
+$grey-background: #f8f8f8;
+$grey-text: #797979;
+$grey-lighter-text: #b7bbc4;
+$grey-highlight: #e0e0e0;
+$text-link: #2b313f;

@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: $content-separator;
+  height: $header-height;
+  background-color: $grey-background;
+}
+
+.query-input__voice {
+  color: $grey-text;
+  margin-left: 10px;
+}

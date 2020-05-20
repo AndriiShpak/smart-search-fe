@@ -1,0 +1,28 @@
+{
+
+  "auth": {
+    "logout": "Logout"
+  },
+  "try-it": {
+    "input-placeholder": "Try it now",
+    "empty-hint": "Please use test console above to try a sentence."
+  },
+  "intents": {
+    "title": "Intents"
+  },
+  "filters": {
+    "title": "Filters"
+  },
+  "analytics": {
+    "title": "Analytics"
+  },
+  "validations": {
+    "title": "Validations"
+  },
+  "settings": {
+    "title": "Settings"
+  },
+  "account": {
+    "title": "Account"
+  }
+}

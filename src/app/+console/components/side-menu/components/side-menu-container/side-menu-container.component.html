@@ -1,0 +1,23 @@
+<app-side-logo></app-side-logo>
+<div class="menu__content">
+  <app-side-item
+    *ngFor="let sideItem of mainSections"
+    [item]="sideItem"
+  >
+  </app-side-item>
+  <div class="menu__divider"></div>
+  <app-side-item
+    *ngFor="let sideItem of validationSections"
+    [item]="sideItem"
+  >
+  </app-side-item>
+</div>
+<div class="menu__footer">
+  <app-side-item
+    *ngFor="let sideItem of accountSections"
+    [item]="sideItem"
+  >
+  </app-side-item>
+  <app-side-item [item]="logoutSection">
+  </app-side-item>
+</div>

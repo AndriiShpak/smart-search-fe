@@ -1,0 +1,11 @@
+@import 'variables.scss';
+
+:host {
+  display: flex;
+  color: $grey-text;
+  font-size: 20px;
+  align-items: center;
+  padding-left: 30px;
+  border-bottom: $content-separator;
+  height: $header-height;
+}

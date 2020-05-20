@@ -1,0 +1,22 @@
+<a
+  *ngIf="item.route; else buttonTemplate"
+  mat-button
+  [routerLink]="item.route"
+  routerLinkActive="item__link--active"
+  class="item__link"
+>
+  <ng-content *ngTemplateOutlet="itemTemplate"></ng-content>
+</a>
+
+<ng-template #buttonTemplate>
+  <button mat-button class="item__link">
+    <ng-content *ngTemplateOutlet="itemTemplate"></ng-content>
+  </button>
+</ng-template>
+
+<ng-template #itemTemplate>
+  <mat-icon class="item__icon">{{ item.icon }}</mat-icon>
+  <span>
+    {{ item.text | translate }}
+  </span>
+</ng-template>

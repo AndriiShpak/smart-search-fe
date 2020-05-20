@@ -1,0 +1,12 @@
+<aside class="content__side-menu">
+  <app-side-menu-container></app-side-menu-container>
+</aside>
+<header class="content__header">
+  <app-header [text]="headerText$ | async" [icon]="headerIcon$ | async"></app-header>
+</header>
+<main class="content__main">
+  <router-outlet></router-outlet>
+</main>
+<aside class="content__try-it">
+  <app-try-it-container></app-try-it-container>
+</aside>

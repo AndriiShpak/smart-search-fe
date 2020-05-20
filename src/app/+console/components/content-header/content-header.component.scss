@@ -1,0 +1,23 @@
+@import 'variables.scss';
+
+:host {
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  height: 100%;
+}
+
+.header {
+  &__icon {
+    $size: 30px;
+
+    color: $grey-lighter-text;
+    font-size: $size;
+    width: $size;
+    height: $size;
+  }
+
+  &__text {
+    margin: 0 0 0 14px;
+  }
+}

@@ -1,0 +1,14 @@
+@import 'variables.scss';
+
+:host {
+  display: block;
+  text-align: center;
+  padding: 40px 30px 0 30px;
+  color: $grey-text;
+}
+
+.placeholder {
+  &__hint {
+    margin-top: 5px;
+  }
+}

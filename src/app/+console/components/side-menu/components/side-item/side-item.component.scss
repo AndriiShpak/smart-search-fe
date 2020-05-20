@@ -1,0 +1,37 @@
+@import 'variables.scss';
+
+$item-min-height: 46px;
+
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.item {
+  &__link {
+    text-decoration: none;
+    color: $text-link;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    padding: 0 30px;
+    font-weight: normal;
+    min-height: $item-min-height;
+    border-radius: 0;
+
+    &--active{
+      color: $primary;
+      background-color: $grey-highlight;
+    }
+  }
+
+  &__icon {
+    $size: 30px;
+
+    color: $grey-lighter-text;
+    font-size: $size;
+    width: $size;
+    height: $size;
+    margin-right: 14px;
+  }
+}
