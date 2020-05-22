@@ -13,4 +13,7 @@ export class GenericHttpService {
 
   public get = <T>(relativeUrl: string, queryParams: {} = {}): Observable<T> =>
     this.httpClient.get<T>(this.apiUrl + relativeUrl, { params: queryParams });
+
+  public put = <T>(relativeUrl: string, item: T): Observable<T> =>
+    this.httpClient.put<T>(this.apiUrl + relativeUrl, item);
 }

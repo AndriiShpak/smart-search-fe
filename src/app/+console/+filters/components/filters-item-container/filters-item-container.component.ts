@@ -33,11 +33,18 @@ export class FiltersItemContainerComponent implements OnInit {
       : of(null);
   }
 
+  public onSave(item: FilterEntityModel): void {
+    this.filterEntitiesService.saveEntity(item).subscribe(() => {
+      this.filterEntitiesService.triggerLoad(true);
+    });
+  }
+
   private registerHeader(item: FilterEntityModel | null): void {
     if (item) {
       // TODO: investigate why header is not applied in sync way
       setTimeout(() => {
-        this.headerService.headerTitle$.next(item.displayName);
+        // TODO: add pipe
+        this.headerService.headerTitle$.next(item.name.system);
         this.headerService.headerIcon$.next('alternate_email');
       });
     }

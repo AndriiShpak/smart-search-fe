@@ -17,6 +17,7 @@ import {
   FiltersItemComponent,
 } from './components';
 import { routes } from './filters.routes';
+import { ConsolePipesModule } from '../pipes';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { routes } from './filters.routes';
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ConsolePipesModule,
     MatExpansionModule,
     MatTabsModule,
     MatButtonModule,

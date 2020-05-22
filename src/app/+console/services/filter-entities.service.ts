@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { exhaustMap, filter, map } from 'rxjs/operators';
+import { exhaustMap, filter, map, take } from 'rxjs/operators';
+import Rmap from 'ramda/es/map';
 
 import { GenericHttpService } from 'src/app/services';
 import { FilterEntityModel, FilterEntityStateModel } from '../models';
 import { mapFilterEntitiesToState } from '../utils';
+
+const ENTITIES_URL = '/filters/entities';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +19,7 @@ export class FilterEntitiesService {
   private entitiesSubj$: BehaviorSubject<FilterEntityStateModel | null> = new BehaviorSubject(
     null
   );
-  private loadSubj$: Subject<void> = new Subject();
+  private loadSubj$: Subject<boolean> = new Subject();
 
   constructor(private genericHttp: GenericHttpService) {
     this.entities$ = this.entitiesSubj$
@@ -26,18 +29,24 @@ export class FilterEntitiesService {
     this.handleLoad();
   }
 
-  public triggerLoad(): void {
-    this.loadSubj$.next();
+  public triggerLoad(force: boolean = false): void {
+    this.loadSubj$.next(force);
+  }
+
+  public saveEntity(entity: FilterEntityModel): Observable<FilterEntityModel> {
+    return this.genericHttp.put(ENTITIES_URL, entity);
   }
 
   private handleLoad(): void {
     this.loadSubj$
       .pipe(
-        filter(() => !this.entitiesSubj$.value),
+        filter((isForce) => !this.entitiesSubj$.value || isForce),
         exhaustMap(() =>
           // TODO: add catch error
-          this.genericHttp.get<FilterEntityModel[]>('/entities')
+          this.genericHttp.get<FilterEntityModel[]>(ENTITIES_URL)
         ),
+        // TODO: temporary until API return id with underscore
+        map(Rmap((entity) => ({ ...entity, id: entity._id }))),
         map(mapFilterEntitiesToState)
       )
       .subscribe((entities) => {

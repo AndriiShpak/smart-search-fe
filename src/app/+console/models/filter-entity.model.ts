@@ -1,9 +1,17 @@
+import { NameMapModel } from './name-map.model';
+
 export interface FilterEntityModel {
   id: string;
-  displayName: string;
+  clientId: string;
   groupReference: string;
+  name: NameMapModel;
   entities: Array<{
-    value: string;
-    synonyms: string[];
+    name: NameMapModel;
+    synonyms: NameMapModel[];
   }>;
+  isReadyForSearch: boolean;
+  isRequired: boolean;
+  isOnlySynonyms: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

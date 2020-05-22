@@ -1,14 +1,39 @@
+<button class="item__action-button " mat-raised-button color="primary" (click)="onSave()">Save</button>
+
 <div class="item__config-block">
-  <mat-checkbox class="item__general-config-checkbox">Ready for search</mat-checkbox>
-  <mat-checkbox class="item__general-config-checkbox">Required</mat-checkbox>
+  <mat-checkbox
+    [checked]="mutableFilterItem.isReadyForSearch"
+    (change)="mutableFilterItem.isReadyForSearch = !mutableFilterItem.isReadyForSearch"
+    class="item__general-config-checkbox"
+  >
+    Ready for search
+  </mat-checkbox>
+  <mat-checkbox
+    [checked]="mutableFilterItem.isRequired"
+    (change)="mutableFilterItem.isRequired = !mutableFilterItem.isRequired"
+    class="item__general-config-checkbox"
+  >
+    Required
+  </mat-checkbox>
+  <mat-checkbox
+    [checked]="mutableFilterItem.isOnlySynonyms"
+    (change)="mutableFilterItem.isOnlySynonyms = !mutableFilterItem.isOnlySynonyms"
+    class="item__general-config-checkbox"
+  >
+    Only synonyms
+  </mat-checkbox>
 </div>
 
-<div *ngFor="let entity of filterItem.entities; let index = index" class="item__synonyms-block">
-  {{ entity.value }}:
+<div *ngFor="let entity of mutableFilterItem.entities; let index = index" class="item__synonyms-block">
+  {{ entity.name | nameMap }}:
   <mat-form-field class="item__synonyms-input">
     <mat-chip-list #synonymsList>
-      <mat-chip *ngFor="let synonym of filterItem.entities[index].synonyms" [removable]="true">
-        {{synonym}}
+      <mat-chip
+        *ngFor="let synonym of mutableFilterItem.entities[index].synonyms"
+        [removable]="true"
+        (removed)="removeSynonym(index, synonym)"
+      >
+        {{synonym | nameMap }}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
@@ -19,5 +44,4 @@
       >
     </mat-chip-list>
   </mat-form-field>
-  <mat-checkbox class="item__item-config-checkbox">only synonyms</mat-checkbox>
 </div>

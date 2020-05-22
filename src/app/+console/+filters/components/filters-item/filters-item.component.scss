@@ -1,4 +1,10 @@
+@import 'mixins.scss';
+
 .item {
+  &__action-button {
+    @include content-action-button ;
+  }
+
   &__config-block {
     margin-bottom: 20px;
   }

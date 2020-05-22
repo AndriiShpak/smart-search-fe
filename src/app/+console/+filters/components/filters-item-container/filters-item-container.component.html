@@ -1,4 +1,5 @@
 <app-filters-item
   *ngIf="filterItem$ | async; let filterItem"
   [filterItem]="filterItem"
+  (saved)="onSave($event)"
 ></app-filters-item>

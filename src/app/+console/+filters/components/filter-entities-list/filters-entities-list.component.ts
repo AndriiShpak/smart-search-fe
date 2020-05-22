@@ -5,8 +5,7 @@ import {
   Input,
 } from '@angular/core';
 
-import { FilterEntityByGroupModel, FilterEntityModel } from '../../../models';
-import { SYSTEM_ENTITY_GROUP } from '../../filters.constants';
+import { FilterEntityByGroupModel } from '../../../models';
 
 @Component({
   selector: 'app-filters-entities-list',
@@ -19,16 +18,8 @@ export class FiltersEntitiesListComponent implements OnChanges {
   public filterEntities: FilterEntityByGroupModel;
 
   public groups: string[];
-  public systemEntities: FilterEntityModel[];
 
   public ngOnChanges(): void {
-    this.groups = this.filterEntities
-      ? Object.keys(this.filterEntities).filter(
-          (entity) => entity !== SYSTEM_ENTITY_GROUP
-        )
-      : [];
-
-    this.systemEntities =
-      (this.filterEntities && this.filterEntities[SYSTEM_ENTITY_GROUP]) || [];
+    this.groups = Object.keys(this.filterEntities);
   }
 }
