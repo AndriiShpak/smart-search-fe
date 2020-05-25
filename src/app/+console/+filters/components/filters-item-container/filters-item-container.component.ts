@@ -44,7 +44,7 @@ export class FiltersItemContainerComponent implements OnInit {
       // TODO: investigate why header is not applied in sync way
       setTimeout(() => {
         // TODO: add pipe
-        this.headerService.headerTitle$.next(item.name.system);
+        this.headerService.headerTitle$.next(item.name.en);
         this.headerService.headerIcon$.next('alternate_email');
       });
     }

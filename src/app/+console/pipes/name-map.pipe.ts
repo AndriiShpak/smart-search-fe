@@ -5,6 +5,6 @@ import { NameMapModel } from '../models';
 @Pipe({ name: 'nameMap' })
 export class NameMapPipe implements PipeTransform {
   transform(value: NameMapModel): string {
-    return value.system;
+    return value.en;
   }
 }

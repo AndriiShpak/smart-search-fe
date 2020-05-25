@@ -36,7 +36,7 @@ export class FiltersItemComponent implements OnChanges {
   public addSynonym(index: number, event: MatChipInputEvent): void {
     // TODO: add pushing by language
     this.mutableFilterItem.entities[index].synonyms.push({
-      system: event.value,
+      en: event.value,
     });
     event.input.value = '';
   }
