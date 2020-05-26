@@ -1,7 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { FilterEntityModel } from '../../../models';
-
 @Component({
   selector: 'app-list-group-item',
   templateUrl: './list-group-item.component.html',
@@ -10,5 +8,8 @@ import { FilterEntityModel } from '../../../models';
 })
 export class ListGroupItemComponent {
   @Input()
-  public item: FilterEntityModel;
+  public redirectId: string;
+
+  @Input()
+  public icon: string;
 }

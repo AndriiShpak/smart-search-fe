@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { HeaderService } from '../../../services';
-import { ACCOUNT_SECTION } from '../../../console.constants';
+import { HeaderService } from '@console-shared/services';
+import { ACCOUNT_SECTION } from '@console-shared/constants';
 
 @Component({
   selector: 'app-account-container',

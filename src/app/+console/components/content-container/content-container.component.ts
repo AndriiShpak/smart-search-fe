@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { HeaderService } from '../../services';
+
+import { HeaderService } from '@console-shared/services';
 
 @Component({
   selector: 'app-content-container',

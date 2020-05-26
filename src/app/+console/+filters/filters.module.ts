@@ -12,18 +12,18 @@ import { MatChipsModule } from '@angular/material/chips';
 import {
   FiltersContainerComponent,
   FiltersEntitiesListComponent,
-  ListGroupItemComponent,
   FiltersItemContainerComponent,
   FiltersItemComponent,
 } from './components';
 import { routes } from './filters.routes';
-import { ConsolePipesModule } from '../pipes';
+import { ConsolePipesModule } from '@console-shared/pipes';
+import { ListGroupItemModule } from '@console-shared/components/list-group-item';
+import { ListGroupFilterModule } from '@console-shared/components/list-group-filter';
 
 @NgModule({
   declarations: [
     FiltersContainerComponent,
     FiltersEntitiesListComponent,
-    ListGroupItemComponent,
     FiltersItemContainerComponent,
     FiltersItemComponent,
   ],
@@ -31,6 +31,8 @@ import { ConsolePipesModule } from '../pipes';
     CommonModule,
     RouterModule.forChild(routes),
     ConsolePipesModule,
+    ListGroupItemModule,
+    ListGroupFilterModule,
     MatExpansionModule,
     MatTabsModule,
     MatButtonModule,

@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import 'common.scss';
 
 $item-min-height: 46px;
 
@@ -26,12 +26,8 @@ $item-min-height: 46px;
   }
 
   &__icon {
-    $size: 30px;
-
+    @include icon-size(30px);
     color: $grey-lighter-text;
-    font-size: $size;
-    width: $size;
-    height: $size;
     margin-right: 14px;
   }
 }

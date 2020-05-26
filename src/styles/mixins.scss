@@ -3,3 +3,9 @@
   top: 22px;
   right: 30px;
 }
+
+@mixin icon-size($size) {
+  height: $size;
+  width: $size;
+  font-size: $size;
+}

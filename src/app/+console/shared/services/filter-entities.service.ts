@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { exhaustMap, filter, map, take } from 'rxjs/operators';
+import { exhaustMap, filter, map } from 'rxjs/operators';
 import Rmap from 'ramda/es/map';
 
-import { GenericHttpService } from 'src/app/services';
-import { FilterEntityModel, FilterEntityStateModel } from '../models';
-import { mapFilterEntitiesToState } from '../utils';
+import { GenericHttpService } from '@app/services';
+import {
+  FilterEntityModel,
+  FilterEntityStateModel,
+} from '@console-shared/models';
+import { mapFilterEntitiesToState } from '@console-shared/utils';
 
 const ENTITIES_URL = '/filters/entities';
 

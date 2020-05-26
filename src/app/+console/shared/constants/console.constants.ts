@@ -1,5 +1,5 @@
-import { SectionConfigModel } from './models';
-import { ConsoleRoutesEnum } from './enums';
+import { SectionConfigModel } from '@console-shared/models';
+import { ConsoleRoutesEnum } from '@console-shared/enums';
 
 export const INTENTS_SECTION: SectionConfigModel = {
   text: 'intents.title',

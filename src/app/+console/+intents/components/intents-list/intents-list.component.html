@@ -1,0 +1,23 @@
+
+<mat-tab-group [dynamicHeight]="true">
+  <mat-tab label="Data driven">
+    <div class="list__tab-content">
+      <app-list-group-filter></app-list-group-filter>
+      <app-list-group-item
+        *ngFor="let intent of intents; let last = last"
+        [redirectId]="intent.id"
+        [class.last-item]="last"
+        icon="format_quote"
+      >
+        {{ intent.name | nameMap }}
+      </app-list-group-item>
+    </div>
+  </mat-tab>
+  <mat-tab label="Manual">
+    <div class="list__tab-content">
+      <app-list-group-filter></app-list-group-filter>
+      Manual intents list here
+      <!-- TODO: manual intents -->
+    </div>
+  </mat-tab>
+</mat-tab-group>

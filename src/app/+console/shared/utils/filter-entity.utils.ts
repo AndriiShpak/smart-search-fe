@@ -8,7 +8,7 @@ import {
   FilterEntityModel,
   FilterEntityStateModel,
   FilterEntityByGroupModel,
-} from '../models';
+} from '@console-shared/models';
 
 export const mapFilterEntitiesToState = (
   entities: FilterEntityModel[]
@@ -20,7 +20,7 @@ export const mapFilterEntitiesToState = (
   )(entities),
 });
 
-export const selectItemsByGroupReference = (
+export const selectEntitiesByGroupReference = (
   entitiesState: FilterEntityStateModel | null
 ): FilterEntityByGroupModel =>
   entitiesState
@@ -30,6 +30,6 @@ export const selectItemsByGroupReference = (
       )
     : {};
 
-export const selectItemByIdFactory = (id: string) => (
+export const selectEntityByIdFactory = (id: string) => (
   entitiesState: FilterEntityStateModel | null
 ): FilterEntityModel | null => (entitiesState ? entitiesState.items[id] : null);

@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { SectionConfigModel } from '../../../../models';
+
+import { SectionConfigModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-side-item',

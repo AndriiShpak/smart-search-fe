@@ -1,4 +1,4 @@
-import { ConsoleRoutesEnum } from '../enums';
+import { ConsoleRoutesEnum } from '@console-shared/enums';
 
 export interface SectionConfigModel {
   text: string;

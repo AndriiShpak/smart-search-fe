@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { ContentContainerComponent } from './components';
-import { ConsoleRoutesEnum } from './enums';
+import { ConsoleRoutesEnum } from '@console-shared/enums';
 
 const childRouteConfiguration = {
   // Configured for preload with this flag in PreloadSelectedModulesList class

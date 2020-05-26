@@ -3,9 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { FilterEntitiesService, HeaderService } from '../../../services';
-import { FilterEntityModel } from '../../../models';
-import { selectItemByIdFactory } from '../../../utils';
+import { FilterEntitiesService, HeaderService } from '@console-shared/services';
+import { FilterEntityModel } from '@console-shared/models';
+import { selectEntityByIdFactory } from '@console-shared/utils';
 
 @Component({
   selector: 'app-filters-item-container',
@@ -28,7 +28,7 @@ export class FiltersItemContainerComponent implements OnInit {
 
     this.filterItem$ = id
       ? this.filterEntitiesService.entities$
-          .pipe(map(selectItemByIdFactory(id)))
+          .pipe(map(selectEntityByIdFactory(id)))
           .pipe(tap(this.registerHeader.bind(this)))
       : of(null);
   }

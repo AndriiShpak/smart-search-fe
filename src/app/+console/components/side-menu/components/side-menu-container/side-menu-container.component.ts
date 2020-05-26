@@ -4,8 +4,8 @@ import {
   SIDE_MENU_MAIN_SECTIONS,
   SIDE_MENU_VALIDATION_SECTIONS,
   SIDE_MENU_ACCOUNT_SECTIONS,
-} from '../../../../console.constants';
-import { SectionConfigModel } from '../../../../models';
+} from '@console-shared/constants';
+import { SectionConfigModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-side-menu-container',

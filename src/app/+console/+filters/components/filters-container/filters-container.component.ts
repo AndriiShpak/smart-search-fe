@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HeaderService, FilterEntitiesService } from '../../../services';
-import { FILTER_SECTION } from '../../../console.constants';
-import { FilterEntityByGroupModel } from '../../../models';
-import { selectItemsByGroupReference } from 'src/app/+console/utils';
+import { HeaderService, FilterEntitiesService } from '@console-shared/services';
+import { FILTER_SECTION } from '@console-shared/constants';
+import { FilterEntityByGroupModel } from '@console-shared/models';
+import { selectEntitiesByGroupReference } from '@console-shared/utils';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -25,7 +25,7 @@ export class FiltersContainerComponent implements OnInit {
     this.registerHeader();
     this.filterEntitiesService.triggerLoad();
     this.filterEntities$ = this.filterEntitiesService.entities$.pipe(
-      map(selectItemsByGroupReference)
+      map(selectEntitiesByGroupReference)
     );
   }
 

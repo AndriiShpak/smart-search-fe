@@ -1,4 +1,4 @@
-import { NameMapModel } from './name-map.model';
+import { NameMapModel } from '../name-map.model';
 
 export interface FilterEntityModel {
   id: string;

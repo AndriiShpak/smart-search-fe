@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core';
 
-import { FilterEntityByGroupModel } from '../../../models';
+import { FilterEntityByGroupModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-filters-entities-list',

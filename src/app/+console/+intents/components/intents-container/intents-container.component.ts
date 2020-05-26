@@ -1,7 +1,11 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { HeaderService } from '../../../services';
-import { INTENTS_SECTION } from '../../../console.constants';
+import { HeaderService, IntentsService } from '@console-shared/services';
+import { IntentModel } from '@console-shared/models';
+import { INTENTS_SECTION } from '@console-shared/constants';
+import { selectIntentsList } from '@console-shared/utils';
 
 @Component({
   selector: 'app-intents-container',
@@ -9,9 +13,18 @@ import { INTENTS_SECTION } from '../../../console.constants';
   styleUrls: ['./intents-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IntentsContainerComponent {
-  constructor(private headerService: HeaderService) {
+export class IntentsContainerComponent implements OnInit {
+  public intents$: Observable<IntentModel[]>;
+
+  constructor(
+    private headerService: HeaderService,
+    private intentsService: IntentsService
+  ) {}
+
+  public ngOnInit(): void {
     this.registerHeader();
+    this.intentsService.triggerLoad();
+    this.intents$ = this.intentsService.intents$.pipe(map(selectIntentsList));
   }
 
   private registerHeader(): void {

@@ -8,9 +8,9 @@ import {
 } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import Rclone from 'ramda/es/clone';
-
-import { FilterEntityModel, NameMapModel } from '../../../models';
 import { MatChipInputEvent } from '@angular/material/chips';
+
+import { FilterEntityModel, NameMapModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-filters-item',

@@ -1,0 +1,17 @@
+@import 'common.scss';
+
+:host {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.group-filter {
+  &__search-input {
+    width: calc(100% - 60px);
+  }
+
+  &__filter {
+    color: $grey-text;
+    margin-left: 20px;
+  }
+}
