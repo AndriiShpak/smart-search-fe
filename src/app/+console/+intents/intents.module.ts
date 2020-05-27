@@ -10,11 +10,14 @@ import {
   IntentsListComponent,
   IntentsItemContainerComponent,
   IntentsItemComponent,
+  IntentsEntitiesListComponent,
+  HighlightInputComponent,
 } from './components';
 import { routes } from './intents.routes';
 import { ListGroupItemModule } from '@console-shared/components/list-group-item';
 import { ConsolePipesModule } from '@console-shared/pipes';
 import { ListGroupFilterModule } from '@console-shared/components/list-group-filter';
+import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-notice';
 
 @NgModule({
   declarations: [
@@ -22,12 +25,15 @@ import { ListGroupFilterModule } from '@console-shared/components/list-group-fil
     IntentsListComponent,
     IntentsItemContainerComponent,
     IntentsItemComponent,
+    IntentsEntitiesListComponent,
+    HighlightInputComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ListGroupItemModule,
     ListGroupFilterModule,
+    ComingSoonNoticeModule,
     ConsolePipesModule,
     MatTabsModule,
     MatIconModule,

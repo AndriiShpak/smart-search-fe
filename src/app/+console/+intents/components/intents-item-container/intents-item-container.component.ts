@@ -1,11 +1,23 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  ChangeDetectorRef,
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
 
-import { HeaderService, IntentsService } from '@console-shared/services';
-import { IntentModel } from '@console-shared/models';
-import { FILTER_SECTION } from '@console-shared/constants';
-import { selectIntentsList } from '@console-shared/utils';
+import {
+  HeaderService,
+  IntentsService,
+  FilterEntitiesService,
+} from '@console-shared/services';
+import { IntentModel, FilterEntityModel } from '@console-shared/models';
+import {
+  selectIntentByIdFactory,
+  selectEntitiesByGroupFactory,
+} from '@console-shared/utils';
 
 @Component({
   selector: 'app-intents-item-container',
@@ -14,21 +26,59 @@ import { selectIntentsList } from '@console-shared/utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IntentsItemContainerComponent implements OnInit {
-  public intents$: Observable<IntentModel[]>;
+  public intent: IntentModel;
+  public filterEntities$: Observable<FilterEntityModel[]>;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private headerService: HeaderService,
-    private intentsService: IntentsService
+    private intentsService: IntentsService,
+    private filterEntityService: FilterEntitiesService,
+    private cd: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
-    this.registerHeader();
+    const id: string = this.activatedRoute.snapshot.params.id;
     this.intentsService.triggerLoad();
-    this.intents$ = this.intentsService.intents$.pipe(map(selectIntentsList));
+    this.filterEntityService.triggerLoad();
+
+    if (id) {
+      this.setupIntent(id);
+    }
   }
 
-  private registerHeader(): void {
-    this.headerService.headerTitle$.next(FILTER_SECTION.text);
-    this.headerService.headerIcon$.next(FILTER_SECTION.icon);
+  public onSave(intent: IntentModel): void {
+    this.intentsService.saveEntity(intent).subscribe(() => {
+      this.intentsService.triggerLoad(true);
+    });
+  }
+
+  // TODO: add on destroy
+  private setupIntent(id: string): void {
+    this.intentsService.intents$
+      .pipe(
+        map(selectIntentByIdFactory(id)),
+        filter<IntentModel>(Boolean),
+        take(1)
+      )
+      .subscribe((intent) => {
+        this.intent = intent;
+        this.registerHeader(intent);
+        this.filterEntities$ = this.filterEntityService.entities$.pipe(
+          map(selectEntitiesByGroupFactory(intent.name.system))
+        );
+        this.cd.markForCheck();
+      });
+  }
+
+  private registerHeader(item: IntentModel | null): void {
+    if (item) {
+      // TODO: investigate why header is not applied in sync way
+      setTimeout(() => {
+        // TODO: add pipe
+        this.headerService.headerTitle$.next(item.name.en);
+        this.headerService.headerIcon$.next('format_quote');
+      });
+    }
   }
 }

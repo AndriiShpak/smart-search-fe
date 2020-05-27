@@ -4,9 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { ValidationsContainerComponent } from './components';
 import { routes } from './validations.routes';
+import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-notice';
 
 @NgModule({
   declarations: [ValidationsContainerComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ComingSoonNoticeModule,
+  ],
 })
 export class ValidationsModule {}

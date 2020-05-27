@@ -14,10 +14,6 @@ export const routes: Routes = [
     component: ContentContainerComponent,
     children: [
       {
-        path: '',
-        redirectTo: ConsoleRoutesEnum.INTENTS,
-      },
-      {
         path: ConsoleRoutesEnum.INTENTS,
         loadChildren: () =>
           import('./+intents/intents.module').then((m) => m.IntentsModule),
@@ -56,6 +52,10 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./+account/account.module').then((m) => m.AccountModule),
         data: childRouteConfiguration,
+      },
+      {
+        path: '',
+        redirectTo: ConsoleRoutesEnum.INTENTS,
       },
     ],
   },

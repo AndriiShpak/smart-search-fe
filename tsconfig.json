@@ -19,6 +19,7 @@
       "@app/*": ["src/app/*"],
       "@environment": ["src/environments/environment"],
       "@console-shared/*": ["src/app/+console/shared/*"],
+      "@console-intents/*": ["src/app/+console/+intents/*"],
     }
   },
   "angularCompilerOptions": {

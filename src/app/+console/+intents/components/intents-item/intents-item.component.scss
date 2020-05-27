@@ -1,0 +1,23 @@
+@import 'common.scss';
+
+
+.intents-item {
+  &__entities-list-container {
+    position: absolute;
+    top: $header-height;
+    bottom: 0;
+    right: 0;
+    width: 33%;
+    border-left: $content-separator;
+    border-left-style: dotted;
+    padding: $main-content-padding;
+  }
+
+  &__training-container {
+    width: 67%;
+  }
+
+  &__action-button {
+    @include content-action-button;
+  }
+}

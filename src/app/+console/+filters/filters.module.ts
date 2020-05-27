@@ -19,6 +19,7 @@ import { routes } from './filters.routes';
 import { ConsolePipesModule } from '@console-shared/pipes';
 import { ListGroupItemModule } from '@console-shared/components/list-group-item';
 import { ListGroupFilterModule } from '@console-shared/components/list-group-filter';
+import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-notice';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ListGroupFilterModule } from '@console-shared/components/list-group-fil
     ConsolePipesModule,
     ListGroupItemModule,
     ListGroupFilterModule,
+    ComingSoonNoticeModule,
     MatExpansionModule,
     MatTabsModule,
     MatButtonModule,

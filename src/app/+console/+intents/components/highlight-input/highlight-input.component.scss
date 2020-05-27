@@ -1,0 +1,24 @@
+@import 'common.scss';
+
+:host {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.highlight-input {
+  &__editable-content {
+    outline: 0;
+    flex-grow: 1;
+    white-space: pre;
+  }
+
+  &__remove {
+    color: $grey-text;
+    margin-left: 5px;
+  }
+
+  &__remove-icon {
+    @include icon-size(20px);
+  }
+}

@@ -1,0 +1,17 @@
+@import 'common.scss';
+
+:host {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.notice {
+  &__icon {
+    color: $grey-text;
+    margin: 0 10px;
+  }
+}

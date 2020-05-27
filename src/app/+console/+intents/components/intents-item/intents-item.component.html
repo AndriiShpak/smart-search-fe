@@ -1,0 +1,38 @@
+<button class="intents-item__action-button" mat-raised-button color="primary" (click)="onSave()">Save</button>
+
+<app-intents-entities-list
+  class="intents-item__entities-list-container"
+  [filterEntities]="filterEntities"
+  [isSelectMode]="!!currentSelection"
+  (entitySelected)="onEntitySelected($event)"
+>
+</app-intents-entities-list>
+
+<div class="intents-item__training-container">
+  <h2>
+    Training phrases
+  </h2>
+  <app-list-group-item
+    *ngFor="let trainingPhrase of (mutableIntent.trainingPhrases | nameMap); let index = index;"
+    [isTextOnly]="true"
+  >
+    <app-highlight-input
+      [parts]="trainingPhrase.parts"
+      (inputChanged)="onInputChange(index, $event)"
+      (selectionChanged)="onSelection(index, $event)"
+      (removed)="onRemove(index)"
+    >
+    </app-highlight-input>
+  </app-list-group-item>
+  <app-list-group-item
+    class="last-item"
+    [isTextOnly]="true"
+  >
+    <app-highlight-input
+      [parts]="[]"
+      [isAddMode]="true"
+      (inputChanged)="onNewAdded($event)"
+    >
+    </app-highlight-input>
+  </app-list-group-item>
+</div>

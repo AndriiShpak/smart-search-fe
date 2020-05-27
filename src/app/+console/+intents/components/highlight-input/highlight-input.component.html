@@ -1,0 +1,16 @@
+<!--
+  TODO: Add input like accessibility
+-->
+<div #editableContent contenteditable (focusout)="onFocusOut()" (keyup.enter)="onEnterKey()" class="highlight-input__editable-content">
+  <ng-container *ngFor="let part of parts; let index = index;">
+    <span
+      [attr.data-entity]="part.entityType"
+      *ngIf="part.entityType; else textTemplate"
+      [style.backgroundColor]="colorsByIndex[index]"
+    >{{ part.text }}</span>
+    <ng-template #textTemplate>{{ part.text }}</ng-template>
+  </ng-container>
+</div>
+<button *ngIf="!isAddMode" mat-icon-button class="highlight-input__remove" (click)="onRemove()">
+  <mat-icon class="highlight-input__remove-icon">delete_outline</mat-icon>
+</button>

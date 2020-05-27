@@ -20,6 +20,6 @@ export class FiltersEntitiesListComponent implements OnChanges {
   public groups: string[];
 
   public ngOnChanges(): void {
-    this.groups = Object.keys(this.filterEntities);
+    this.groups = this.filterEntities ? Object.keys(this.filterEntities) : [];
   }
 }

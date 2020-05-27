@@ -1,6 +1,6 @@
 import { TrainingPhrasePartModel } from './training-phrase-part.model';
 
 export interface TrainingPhraseModel {
-  dialogflowId: string;
+  dialogflowId?: string;
   parts: TrainingPhrasePartModel[];
 }

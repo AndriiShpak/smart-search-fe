@@ -1,0 +1,13 @@
+<h2>
+  Available entities for intent
+</h2>
+
+<app-list-group-item
+  *ngFor="let filterEntity of filterEntities; let last = last; let index = index"
+  [class.last-item]="last"
+  [isTextOnly]="!isSelectMode"
+  (buttonClick)="onEntityClick(filterEntity)"
+>
+  <span [style.backgroundColor]="filterColors[index]" class="entities-list__color-sample"></span>
+  {{ filterEntity.name | nameMap }}
+</app-list-group-item>

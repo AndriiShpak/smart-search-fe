@@ -33,3 +33,12 @@ export const selectEntitiesByGroupReference = (
 export const selectEntityByIdFactory = (id: string) => (
   entitiesState: FilterEntityStateModel | null
 ): FilterEntityModel | null => (entitiesState ? entitiesState.items[id] : null);
+
+export const selectEntitiesByGroupFactory = (group: string) => (
+  entitiesState: FilterEntityStateModel | null
+): FilterEntityModel[] | null =>
+  entitiesState
+    ? entitiesState.byGroup[group].map((id) =>
+        selectEntityByIdFactory(id)(entitiesState)
+      )
+    : null;

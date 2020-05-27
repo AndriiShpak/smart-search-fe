@@ -1,4 +1,19 @@
-<a [routerLink]="redirectId" mat-button class="item__link">
+<a *ngIf="redirectId; else buttonTemplate" [routerLink]="redirectId" mat-button class="item__link">
+  <ng-container *ngTemplateOutlet="content"></ng-container>
+</a>
+<ng-template #buttonTemplate>
+  <button *ngIf="!isTextOnly; else textOnly" mat-button class="item__link" (click)="buttonClick.emit()">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </button>
+</ng-template>
+
+<ng-template #textOnly>
+  <div class="item__link item__link--text">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #content>
   <mat-icon *ngIf="icon" class="item__icon">{{icon}}</mat-icon>
   <ng-content></ng-content>
-</a>
+</ng-template>

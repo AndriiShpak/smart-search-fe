@@ -1,4 +1,7 @@
-<app-intents-list
-  [intents]="intents$ | async"
+<app-intents-item
+  *ngIf="intent"
+  [intent]="intent"
+  [filterEntities]="filterEntities$ | async"
+  (saved)="onSave($event)"
 >
-</app-intents-list>
+</app-intents-item>

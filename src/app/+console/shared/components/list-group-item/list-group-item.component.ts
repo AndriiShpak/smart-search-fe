@@ -1,4 +1,10 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'app-list-group-item',
@@ -12,4 +18,10 @@ export class ListGroupItemComponent {
 
   @Input()
   public icon: string;
+
+  @Input()
+  public isTextOnly: boolean;
+
+  @Output()
+  public buttonClick: EventEmitter<void> = new EventEmitter();
 }

@@ -4,9 +4,14 @@ import { RouterModule } from '@angular/router';
 
 import { AccountContainerComponent } from './components';
 import { routes } from './account.routes';
+import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-notice';
 
 @NgModule({
   declarations: [AccountContainerComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ComingSoonNoticeModule,
+  ],
 })
 export class AccountModule {}

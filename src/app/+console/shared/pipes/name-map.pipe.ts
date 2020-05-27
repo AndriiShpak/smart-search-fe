@@ -3,8 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { NameMapModel } from '@console-shared/models';
 
 @Pipe({ name: 'nameMap' })
-export class NameMapPipe implements PipeTransform {
-  transform(value: NameMapModel): string {
+export class NameMapPipe<T> implements PipeTransform {
+  transform(value: NameMapModel<T>): T {
     return value.en;
   }
 }
