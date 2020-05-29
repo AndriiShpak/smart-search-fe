@@ -2,6 +2,11 @@
 
 
 .intents-item {
+  &__heading {
+    display: flex;
+    justify-content: space-between;
+  }
+
   &__entities-list-container {
     position: absolute;
     top: $header-height;
@@ -14,7 +19,7 @@
   }
 
   &__training-container {
-    width: 67%;
+    width: 65%;
   }
 
   &__action-button {

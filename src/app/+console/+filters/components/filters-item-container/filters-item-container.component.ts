@@ -1,11 +1,18 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 import { FilterEntitiesService, HeaderService } from '@console-shared/services';
 import { FilterEntityModel } from '@console-shared/models';
 import { selectEntityByIdFactory } from '@console-shared/utils';
+import { NameLanguagePipe } from '@console-shared/pipes';
 
 @Component({
   selector: 'app-filters-item-container',
@@ -13,13 +20,17 @@ import { selectEntityByIdFactory } from '@console-shared/utils';
   styleUrls: ['./filters-item-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltersItemContainerComponent implements OnInit {
+export class FiltersItemContainerComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   public filterItem$: Observable<FilterEntityModel>;
+
+  private destroy$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private filterEntitiesService: FilterEntitiesService,
-    private headerService: HeaderService
+    private headerService: HeaderService,
+    private nameLanguagePipe: NameLanguagePipe
   ) {}
 
   public ngOnInit(): void {
@@ -27,10 +38,21 @@ export class FiltersItemContainerComponent implements OnInit {
     this.filterEntitiesService.triggerLoad();
 
     this.filterItem$ = id
-      ? this.filterEntitiesService.entities$
-          .pipe(map(selectEntityByIdFactory(id)))
-          .pipe(tap(this.registerHeader.bind(this)))
+      ? this.filterEntitiesService.entities$.pipe(
+          map(selectEntityByIdFactory(id))
+        )
       : of(null);
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  public ngAfterViewInit(): void {
+    this.filterItem$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(this.registerHeader.bind(this));
   }
 
   public onSave(item: FilterEntityModel): void {
@@ -41,10 +63,11 @@ export class FiltersItemContainerComponent implements OnInit {
 
   private registerHeader(item: FilterEntityModel | null): void {
     if (item) {
-      // TODO: investigate why header is not applied in sync way
+      // Investigate why header is not applied in sync way
       setTimeout(() => {
-        // TODO: add pipe
-        this.headerService.headerTitle$.next(item.name.en);
+        this.headerService.headerTitle$.next(
+          this.nameLanguagePipe.transform(item.name)
+        );
         this.headerService.headerIcon$.next('alternate_email');
       });
     }

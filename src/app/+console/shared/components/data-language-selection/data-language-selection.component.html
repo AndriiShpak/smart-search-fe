@@ -1,0 +1,11 @@
+<mat-chip-list *ngIf="selectedLanguage$ | async as selectedLanguage">
+  <mat-chip
+    *ngFor="let language of availableLanguages"
+    class="data-language__chip"
+    [selectable]="true"
+    [selected]="language === selectedLanguage"
+    (click)="onLanguageChange(language)"
+  >
+    {{language}}
+  </mat-chip>
+</mat-chip-list>

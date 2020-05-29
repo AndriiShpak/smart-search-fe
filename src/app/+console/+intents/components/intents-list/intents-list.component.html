@@ -1,6 +1,6 @@
 
 <mat-tab-group [dynamicHeight]="true">
-  <mat-tab label="Data driven">
+  <mat-tab [label]="'intents.groups.data-driven' | translate">
     <div class="list__tab-content">
       <app-list-group-filter></app-list-group-filter>
       <app-list-group-item
@@ -9,11 +9,11 @@
         [class.last-item]="last"
         icon="format_quote"
       >
-        {{ intent.name | nameMap }}
+        {{ intent.name | nameLanguage }}
       </app-list-group-item>
     </div>
   </mat-tab>
-  <mat-tab label="Manual">
+  <mat-tab [label]="'intents.groups.manual' | translate">
     <div class="list__tab-content">
       <app-list-group-filter></app-list-group-filter>
       <app-coming-soon-notice></app-coming-soon-notice>

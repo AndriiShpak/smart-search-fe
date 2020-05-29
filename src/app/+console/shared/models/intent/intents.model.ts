@@ -1,4 +1,4 @@
-import { NameMapModel } from '../name-map.model';
+import { NameMapModel } from '@console-shared/models/name-map.model';
 import { TrainingPhraseModel } from './training-phrase.model';
 
 export interface IntentModel {

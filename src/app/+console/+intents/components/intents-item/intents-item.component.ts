@@ -16,7 +16,9 @@ import {
   IntentModel,
   FilterEntityModel,
   TrainingPhrasePartModel,
+  TrainingPhraseModel,
 } from '@console-shared/models';
+import { NameDataLanguagePipe } from '@console-shared/pipes';
 
 @Component({
   selector: 'app-intents-item',
@@ -39,16 +41,12 @@ export class IntentsItemComponent implements OnChanges {
 
   constructor(
     private documentEventListenerService: DocumentEventListenerService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private nameDataLanguagePipe: NameDataLanguagePipe
   ) {}
 
   public ngOnChanges(): void {
-    this.mutableIntent = {
-      ...Rclone(this.intent),
-      trainingPhrases: {
-        en: this.intent.trainingPhrases.en || [],
-      },
-    };
+    this.mutableIntent = Rclone(this.intent);
   }
 
   public onSave(): void {
@@ -56,12 +54,12 @@ export class IntentsItemComponent implements OnChanges {
   }
 
   public onInputChange(index: number, parts: TrainingPhrasePartModel[]): void {
-    this.mutableIntent.trainingPhrases.en[index].parts = parts;
+    this.getPhrasesByLanguage()[index].parts = parts;
   }
 
   public onNewAdded(parts: TrainingPhrasePartModel[]): void {
     if (parts.length && parts[0].text.trim()) {
-      this.mutableIntent.trainingPhrases.en.push({
+      this.getPhrasesByLanguage().push({
         parts,
       });
     }
@@ -98,13 +96,19 @@ export class IntentsItemComponent implements OnChanges {
       this.currentSelection.parts[this.currentSelection.markIndex].entityType =
         entity.name.system;
 
-      this.mutableIntent.trainingPhrases.en[
+      this.getPhrasesByLanguage()[
         this.currentSelection.trainingPhraseIndex
       ].parts = this.currentSelection.parts;
     }
   }
 
   public onRemove(index: number): void {
-    this.mutableIntent.trainingPhrases.en.splice(index, 1);
+    this.getPhrasesByLanguage().splice(index, 1);
+  }
+
+  private getPhrasesByLanguage(): TrainingPhraseModel[] {
+    return this.nameDataLanguagePipe.transform(
+      this.mutableIntent.trainingPhrases
+    );
   }
 }

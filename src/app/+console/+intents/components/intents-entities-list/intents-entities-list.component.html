@@ -1,5 +1,5 @@
 <h2>
-  Available entities for intent
+  {{ 'intents.entities-list.title' | translate }}
 </h2>
 
 <app-list-group-item
@@ -9,5 +9,5 @@
   (buttonClick)="onEntityClick(filterEntity)"
 >
   <span [style.backgroundColor]="filterColors[index]" class="entities-list__color-sample"></span>
-  {{ filterEntity.name | nameMap }}
+  {{ filterEntity.name | nameLanguage }}
 </app-list-group-item>

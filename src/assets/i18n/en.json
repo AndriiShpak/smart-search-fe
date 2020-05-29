@@ -1,5 +1,4 @@
 {
-
   "auth": {
     "logout": "Logout"
   },
@@ -8,10 +7,30 @@
     "empty-hint": "Please use test console above to try a sentence."
   },
   "intents": {
-    "title": "Intents"
+    "title": "Intents",
+    "groups": {
+      "data-driven": "Data driven",
+      "manual": "Manual"
+    },
+    "entities-list": {
+      "title": "Available entities for intent"
+    },
+    "training-phrases": {
+      "title": "Training phrases"
+    }
   },
   "filters": {
-    "title": "Filters"
+    "title": "Filters",
+    "groups": {
+      "data-driven": "Data driven",
+      "system": "System"
+    },
+    "edit": {
+      "ready-for-search": "Ready for search",
+      "required": "Required",
+      "only-synonyms": "Only synonyms",
+      "synonyms": "Synonyms"
+    }
   },
   "analytics": {
     "title": "Analytics"
@@ -23,6 +42,21 @@
     "title": "Settings"
   },
   "account": {
-    "title": "Account"
+    "title": "Account",
+    "preferences": {
+      "title": "Preferences",
+      "language-change-title": "Interface language",
+      "language-select-placeholder": "Language"
+    },
+    "profile": {
+      "title": "Profile"
+    }
+  },
+  "generic": {
+    "save": "Save",
+    "search-filter": "Search filter"
+  },
+  "messages": {
+    "under-development": "Component is under development and will be available in future release"
   }
 }

@@ -1,5 +1,5 @@
 <!--
-  TODO: Add input like accessibility
+  TODO: Add input like accessibility + aria labels for icons without text
 -->
 <div #editableContent contenteditable (focusout)="onFocusOut()" (keyup.enter)="onEnterKey()" class="highlight-input__editable-content">
   <ng-container *ngFor="let part of parts; let index = index;">

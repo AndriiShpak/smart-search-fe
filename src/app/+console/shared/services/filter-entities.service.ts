@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { exhaustMap, filter, map } from 'rxjs/operators';
+import { Subject, Observable, BehaviorSubject, of } from 'rxjs';
+import { exhaustMap, filter, map, catchError } from 'rxjs/operators';
 import Rmap from 'ramda/es/map';
 
 import { GenericHttpService } from '@app/services';
@@ -15,7 +15,6 @@ const ENTITIES_URL = '/filters/entities';
 @Injectable({
   providedIn: 'root',
 })
-// TODO: add isLoading
 export class FilterEntitiesService {
   public entities$: Observable<FilterEntityStateModel>;
 
@@ -45,10 +44,12 @@ export class FilterEntitiesService {
       .pipe(
         filter((isForce) => !this.entitiesSubj$.value || isForce),
         exhaustMap(() =>
-          // TODO: add catch error
-          this.genericHttp.get<FilterEntityModel[]>(ENTITIES_URL)
+          this.genericHttp
+            .get<FilterEntityModel[]>(ENTITIES_URL)
+            .pipe(catchError(() => of(null)))
         ),
-        // TODO: temporary until API return id with underscore
+        filter(Boolean),
+        // API return id with underscore
         map(Rmap((entity) => ({ ...entity, id: entity._id }))),
         map(mapFilterEntitiesToState)
       )

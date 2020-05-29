@@ -1,9 +1,17 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { NameMapPipe } from './name-map.pipe';
+import { NameDataLanguagePipe } from './name-data-language.pipe';
+import { NameLanguagePipe } from './name-language.pipe';
 
 @NgModule({
-  declarations: [NameMapPipe],
-  exports: [NameMapPipe],
+  declarations: [NameDataLanguagePipe, NameLanguagePipe],
+  exports: [NameDataLanguagePipe, NameLanguagePipe],
 })
-export class ConsolePipesModule {}
+export class ConsolePipesModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: ConsolePipesModule,
+      providers: [NameDataLanguagePipe, NameLanguagePipe],
+    };
+  }
+}

@@ -1,4 +1,6 @@
-<button class="item__action-button " mat-raised-button color="primary" (click)="onSave()">Save</button>
+<button class="item__action-button " mat-raised-button color="primary" (click)="onSave()">
+  {{ 'generic.save' | translate }}
+</button>
 
 <div class="item__config-block">
   <mat-checkbox
@@ -6,38 +8,40 @@
     (change)="mutableFilterItem.isReadyForSearch = !mutableFilterItem.isReadyForSearch"
     class="item__general-config-checkbox"
   >
-    Ready for search
+    {{'filters.edit.ready-for-search' | translate}}
   </mat-checkbox>
   <mat-checkbox
     [checked]="mutableFilterItem.isRequired"
     (change)="mutableFilterItem.isRequired = !mutableFilterItem.isRequired"
     class="item__general-config-checkbox"
   >
-    Required
+    {{'filters.edit.required' | translate}}
   </mat-checkbox>
   <mat-checkbox
     [checked]="mutableFilterItem.isOnlySynonyms"
     (change)="mutableFilterItem.isOnlySynonyms = !mutableFilterItem.isOnlySynonyms"
     class="item__general-config-checkbox"
   >
-    Only synonyms
+    {{'filters.edit.only-synonyms' | translate}}
   </mat-checkbox>
+  <app-data-language-selection class="item__language-selection">
+  </app-data-language-selection>
 </div>
 
 <div *ngFor="let entity of mutableFilterItem.entities; let index = index" class="item__synonyms-block">
-  {{ entity.name | nameMap }}:
+  {{ entity.name | nameDataLanguage }}:
   <mat-form-field class="item__synonyms-input">
     <mat-chip-list #synonymsList>
       <mat-chip
-        *ngFor="let synonym of mutableFilterItem.entities[index].synonyms"
+        *ngFor="let synonym of (entity.synonyms | nameDataLanguage)"
         [removable]="true"
         (removed)="removeSynonym(index, synonym)"
       >
-        {{synonym | nameMap }}
+        {{ synonym }}
         <mat-icon matChipRemove>cancel</mat-icon>
       </mat-chip>
       <input
-        placeholder="Synonyms"
+        [placeholder]="'filters.edit.synonyms' | translate"
         [matChipInputFor]="synonymsList"
         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
         (matChipInputTokenEnd)="addSynonym(index, $event)"

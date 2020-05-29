@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
+import { TranslateModule } from '@ngx-translate/core';
 
 import {
   FiltersContainerComponent,
@@ -20,6 +21,7 @@ import { ConsolePipesModule } from '@console-shared/pipes';
 import { ListGroupItemModule } from '@console-shared/components/list-group-item';
 import { ListGroupFilterModule } from '@console-shared/components/list-group-filter';
 import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-notice';
+import { DataLanguageSelectionModule } from '@console-shared/components/data-language-selection';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-n
     ListGroupItemModule,
     ListGroupFilterModule,
     ComingSoonNoticeModule,
+    DataLanguageSelectionModule,
     MatExpansionModule,
     MatTabsModule,
     MatButtonModule,
@@ -42,6 +45,7 @@ import { ComingSoonNoticeModule } from '@console-shared/components/coming-soon-n
     MatInputModule,
     MatCheckboxModule,
     MatChipsModule,
+    TranslateModule,
   ],
 })
 export class FiltersModule {}

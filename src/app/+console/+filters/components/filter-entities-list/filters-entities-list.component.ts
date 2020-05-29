@@ -1,11 +1,6 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  OnChanges,
-  Input,
-} from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 
-import { FilterEntityByGroupModel } from '@console-shared/models';
+import { FilterEntityByGroupModel, IntentModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-filters-entities-list',
@@ -13,13 +8,9 @@ import { FilterEntityByGroupModel } from '@console-shared/models';
   styleUrls: ['./filters-entities-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltersEntitiesListComponent implements OnChanges {
+export class FiltersEntitiesListComponent {
   @Input()
   public filterEntities: FilterEntityByGroupModel;
-
-  public groups: string[];
-
-  public ngOnChanges(): void {
-    this.groups = this.filterEntities ? Object.keys(this.filterEntities) : [];
-  }
+  @Input()
+  public intentsWithEntities: IntentModel[];
 }

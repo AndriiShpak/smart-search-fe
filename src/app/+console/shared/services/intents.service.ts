@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
-import { exhaustMap, filter, map } from 'rxjs/operators';
+import { Subject, Observable, BehaviorSubject, of } from 'rxjs';
+import { exhaustMap, filter, map, catchError } from 'rxjs/operators';
 import Rmap from 'ramda/es/map';
 
 import { GenericHttpService } from '@app/services';
@@ -12,7 +12,6 @@ const INTENTS_URL = '/intents/datadriven';
 @Injectable({
   providedIn: 'root',
 })
-// TODO: add isLoading
 export class IntentsService {
   public intents$: Observable<IntentsStateModel>;
 
@@ -42,10 +41,12 @@ export class IntentsService {
       .pipe(
         filter((isForce) => !this.intentsSubj$.value || isForce),
         exhaustMap(() =>
-          // TODO: add catch error
-          this.genericHttp.get<IntentModel[]>(INTENTS_URL)
+          this.genericHttp
+            .get<IntentModel[]>(INTENTS_URL)
+            .pipe(catchError(() => of(null)))
         ),
-        // TODO: temporary until API return id with underscore
+        filter(Boolean),
+        // API return id with underscore
         map(Rmap((intent) => ({ ...intent, id: intent._id }))),
         map(mapIntentsToState)
       )

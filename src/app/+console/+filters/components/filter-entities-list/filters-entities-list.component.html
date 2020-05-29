@@ -1,28 +1,28 @@
 <mat-tab-group [dynamicHeight]="true">
-  <mat-tab label="Data driven">
+  <mat-tab [label]="'filters.groups.data-driven' | translate">
     <div class="list__tab-content">
       <app-list-group-filter></app-list-group-filter>
       <mat-accordion>
-        <mat-expansion-panel *ngFor="let group of groups">
+        <mat-expansion-panel *ngFor="let intent of intentsWithEntities">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{ group }}
+              {{ intent.name | nameLanguage }}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <app-list-group-item
-            *ngFor="let entityFilter of filterEntities[group]; let last = last"
+            *ngFor="let entityFilter of filterEntities[intent.name.system]; let last = last"
             [redirectId]="entityFilter.id"
             [class.last-item]="last"
             icon="alternate_email"
           >
-            {{ entityFilter.name | nameMap }}
+            {{ entityFilter.name | nameLanguage }}
           </app-list-group-item>
         </mat-expansion-panel>
       </mat-accordion>
     </div>
   </mat-tab>
-  <mat-tab label="System">
+  <mat-tab [label]="'filters.groups.system' | translate">
     <div class="list__tab-content">
       <app-list-group-filter></app-list-group-filter>
 

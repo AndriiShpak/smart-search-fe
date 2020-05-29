@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   OnInit,
   ChangeDetectorRef,
+  AfterViewInit,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take, filter } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, take, filter, takeUntil } from 'rxjs/operators';
 
 import {
   HeaderService,
@@ -18,6 +20,7 @@ import {
   selectIntentByIdFactory,
   selectEntitiesByGroupFactory,
 } from '@console-shared/utils';
+import { NameLanguagePipe } from '@console-shared/pipes';
 
 @Component({
   selector: 'app-intents-item-container',
@@ -25,16 +28,20 @@ import {
   styleUrls: ['./intents-item-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IntentsItemContainerComponent implements OnInit {
+export class IntentsItemContainerComponent
+  implements OnInit, AfterViewInit, OnDestroy {
   public intent: IntentModel;
   public filterEntities$: Observable<FilterEntityModel[]>;
+
+  private destroy$ = new Subject();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private headerService: HeaderService,
     private intentsService: IntentsService,
     private filterEntityService: FilterEntitiesService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private nameLanguagePipe: NameLanguagePipe
   ) {}
 
   public ngOnInit(): void {
@@ -47,19 +54,32 @@ export class IntentsItemContainerComponent implements OnInit {
     }
   }
 
+  public ngAfterViewInit(): void {
+    const id: string = this.activatedRoute.snapshot.params.id;
+
+    if (id) {
+      this.setupIntent(id);
+    }
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   public onSave(intent: IntentModel): void {
     this.intentsService.saveEntity(intent).subscribe(() => {
       this.intentsService.triggerLoad(true);
     });
   }
 
-  // TODO: add on destroy
   private setupIntent(id: string): void {
     this.intentsService.intents$
       .pipe(
         map(selectIntentByIdFactory(id)),
         filter<IntentModel>(Boolean),
-        take(1)
+        take(1),
+        takeUntil(this.destroy$)
       )
       .subscribe((intent) => {
         this.intent = intent;
@@ -73,12 +93,10 @@ export class IntentsItemContainerComponent implements OnInit {
 
   private registerHeader(item: IntentModel | null): void {
     if (item) {
-      // TODO: investigate why header is not applied in sync way
-      setTimeout(() => {
-        // TODO: add pipe
-        this.headerService.headerTitle$.next(item.name.en);
-        this.headerService.headerIcon$.next('format_quote');
-      });
+      this.headerService.headerTitle$.next(
+        this.nameLanguagePipe.transform(item.name)
+      );
+      this.headerService.headerIcon$.next('format_quote');
     }
   }
 }

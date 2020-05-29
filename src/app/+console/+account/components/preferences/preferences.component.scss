@@ -1,0 +1,15 @@
+@import 'common.scss';
+
+
+.preference {
+  &__block {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+
+  &__block-label {
+    color: $grey-text;
+    margin-right: 20px;
+  }
+}

@@ -1,4 +1,4 @@
-import { NameMapModel } from '../name-map.model';
+import { NameMapModel } from '@console-shared/models/name-map.model';
 
 export interface FilterEntityModel {
   id: string;
@@ -7,7 +7,7 @@ export interface FilterEntityModel {
   name: NameMapModel;
   entities: Array<{
     name: NameMapModel;
-    synonyms: NameMapModel[];
+    synonyms: NameMapModel<string[]>;
   }>;
   isReadyForSearch: boolean;
   isRequired: boolean;

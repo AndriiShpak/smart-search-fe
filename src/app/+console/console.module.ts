@@ -11,11 +11,13 @@ import {
   TryItModule,
 } from './components';
 import { routes } from './console.routes';
+import { ConsolePipesModule } from './shared/pipes';
 
 @NgModule({
   declarations: [ContentContainerComponent, ContentHeaderComponent],
   imports: [
     RouterModule.forChild(routes),
+    ConsolePipesModule.forRoot(),
     TranslateModule,
     MatIconModule,
     CommonModule,

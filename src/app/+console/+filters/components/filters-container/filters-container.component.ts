@@ -1,11 +1,20 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { HeaderService, FilterEntitiesService } from '@console-shared/services';
+import {
+  HeaderService,
+  FilterEntitiesService,
+  IntentsService,
+} from '@console-shared/services';
 import { FILTER_SECTION } from '@console-shared/constants';
-import { FilterEntityByGroupModel } from '@console-shared/models';
-import { selectEntitiesByGroupReference } from '@console-shared/utils';
-import { map } from 'rxjs/operators';
+import { FilterEntityByGroupModel, IntentModel } from '@console-shared/models';
+import {
+  selectEntitiesByGroupReference,
+  selectIntentsList,
+  filterIntentsWithEntities,
+} from '@console-shared/utils';
+import { combineLatest } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filters-container',
@@ -15,15 +24,31 @@ import { map } from 'rxjs/operators';
 })
 export class FiltersContainerComponent implements OnInit {
   public filterEntities$: Observable<FilterEntityByGroupModel>;
+  public intentsWithEntities$: Observable<IntentModel[]>;
 
   constructor(
     private headerService: HeaderService,
-    private filterEntitiesService: FilterEntitiesService
+    private filterEntitiesService: FilterEntitiesService,
+    private intentsService: IntentsService
   ) {}
 
   public ngOnInit(): void {
     this.registerHeader();
     this.filterEntitiesService.triggerLoad();
+    this.intentsService.triggerLoad();
+    this.intentsWithEntities$ = combineLatest([
+      this.intentsService.intents$.pipe(
+        filter((intents) => !!intents),
+        map(selectIntentsList)
+      ),
+      this.filterEntitiesService.entities$.pipe(
+        filter((entities) => !!entities),
+        map(selectEntitiesByGroupReference)
+      ),
+    ]).pipe(
+      map(([intents, entities]) => filterIntentsWithEntities(intents, entities))
+    );
+
     this.filterEntities$ = this.filterEntitiesService.entities$.pipe(
       map(selectEntitiesByGroupReference)
     );

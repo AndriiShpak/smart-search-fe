@@ -1,0 +1,62 @@
+{
+  "auth": {
+    "logout": "Вийти"
+  },
+  "try-it": {
+    "input-placeholder": "Спробуйте пошук",
+    "empty-hint": "Спробуйте тест-консоль вище, щоб перевірити пошук."
+  },
+  "intents": {
+    "title": "Намір",
+    "groups": {
+      "data-driven": "На основі даних",
+      "manual": "Введені вручну"
+    },
+    "entities-list": {
+      "title": "Доступні фільтри для наміру"
+    },
+    "training-phrases": {
+      "title": "Тренувальні фрази"
+    }
+  },
+  "filters": {
+    "title": "Фільтри",
+    "groups": {
+      "data-driven": "На основі даних",
+      "system": "Системні"
+    },
+    "edit": {
+      "ready-for-search": "Готовий для пошуку",
+      "required": "Обов'язковий",
+      "only-synonyms": "Тільки синоніми",
+      "synonyms": "Синоніми"
+    }
+  },
+  "analytics": {
+    "title": "Аналітика"
+  },
+  "validations": {
+    "title": "Затведження"
+  },
+  "settings": {
+    "title": "Налаштування"
+  },
+  "account": {
+    "title": "Обліковий запис",
+    "preferences": {
+      "title": "Уподобання",
+      "language-change-title": "Мова інтерфейсу",
+      "language-select-placeholder": "Мова"
+    },
+    "profile": {
+      "title": "Профіль"
+    }
+  },
+  "generic": {
+    "save": "Зберегти",
+    "search-filter": "Пошук"
+  },
+  "messages": {
+    "under-development": "Компонент знаходиться в розробці і буде доступний в майбутньому релізі"
+  }
+}

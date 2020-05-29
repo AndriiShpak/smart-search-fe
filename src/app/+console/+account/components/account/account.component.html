@@ -1,0 +1,12 @@
+<mat-tab-group [dynamicHeight]="true">
+  <mat-tab [label]="'account.preferences.title' | translate">
+    <div class="account__tab-content">
+      <app-preferences-container></app-preferences-container>
+    </div>
+  </mat-tab>
+  <mat-tab [label]="'account.profile.title' | translate">
+    <div class="list__tab-content">
+      <app-coming-soon-notice></app-coming-soon-notice>
+    </div>
+  </mat-tab>
+</mat-tab-group>

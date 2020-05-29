@@ -11,6 +11,7 @@ import Rclone from 'ramda/es/clone';
 import { MatChipInputEvent } from '@angular/material/chips';
 
 import { FilterEntityModel, NameMapModel } from '@console-shared/models';
+import { NameDataLanguagePipe } from '@console-shared/pipes';
 
 @Component({
   selector: 'app-filters-item',
@@ -28,26 +29,30 @@ export class FiltersItemComponent implements OnChanges {
   mutableFilterItem: FilterEntityModel;
   separatorKeysCodes = [COMMA, ENTER];
 
+  constructor(private nameDataLanguagePipe: NameDataLanguagePipe) {}
+
   public ngOnChanges(): void {
     this.mutableFilterItem = Rclone(this.filterItem);
   }
 
-  // TODO: add remove functionality
   public addSynonym(index: number, event: MatChipInputEvent): void {
-    // TODO: add pushing by language
-    this.mutableFilterItem.entities[index].synonyms.push({
-      en: event.value,
-    });
+    this.nameDataLanguagePipe
+      .transform(this.mutableFilterItem.entities[index].synonyms)
+      .push(event.value);
+
+    console.log(this.mutableFilterItem);
     event.input.value = '';
   }
 
-  public removeSynonym(index: number, synonym: NameMapModel): void {
-    const synonyms = this.mutableFilterItem.entities[index].synonyms;
+  public removeSynonym(index: number, synonym: string): void {
+    const synonymsPerLanguage = this.nameDataLanguagePipe.transform(
+      this.mutableFilterItem.entities[index].synonyms
+    );
 
-    const indexOfRemoveItem = synonyms.indexOf(synonym);
+    const indexOfRemoveItem = synonymsPerLanguage.indexOf(synonym);
 
     if (indexOfRemoveItem >= 0) {
-      synonyms.splice(index, 1);
+      synonymsPerLanguage.splice(index, 1);
     }
   }
 

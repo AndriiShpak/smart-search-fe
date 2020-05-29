@@ -1,4 +1,6 @@
-<button class="intents-item__action-button" mat-raised-button color="primary" (click)="onSave()">Save</button>
+<button class="intents-item__action-button" mat-raised-button color="primary" (click)="onSave()">
+  {{ 'generic.save' | translate }}
+</button>
 
 <app-intents-entities-list
   class="intents-item__entities-list-container"
@@ -9,11 +11,14 @@
 </app-intents-entities-list>
 
 <div class="intents-item__training-container">
-  <h2>
-    Training phrases
-  </h2>
+    <div class="intents-item__heading">
+    <h2>
+      {{ 'intents.training-phrases.title' | translate }}
+    </h2>
+    <app-data-language-selection></app-data-language-selection>
+  </div>
   <app-list-group-item
-    *ngFor="let trainingPhrase of (mutableIntent.trainingPhrases | nameMap); let index = index;"
+    *ngFor="let trainingPhrase of (mutableIntent.trainingPhrases | nameDataLanguage); let index = index;"
     [isTextOnly]="true"
   >
     <app-highlight-input
