@@ -36,9 +36,12 @@ export const selectEntityByIdFactory = (id: string) => (
 
 export const selectEntitiesByGroupFactory = (group: string) => (
   entitiesState: FilterEntityStateModel | null
-): FilterEntityModel[] | null =>
+): FilterEntityModel[] =>
   entitiesState
-    ? entitiesState.byGroup[group].map((id) =>
+    ? (entitiesState.byGroup[group] || []).map((id) =>
         selectEntityByIdFactory(id)(entitiesState)
       )
-    : null;
+    : [];
+
+export const filterEntitiesReadyForSearch = (entities: FilterEntityModel[]) =>
+  entities.filter((entity) => entity.isReadyForSearch);

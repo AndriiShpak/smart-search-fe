@@ -20,8 +20,7 @@ import { NameLanguagePipe } from '@console-shared/pipes';
   styleUrls: ['./filters-item-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FiltersItemContainerComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class FiltersItemContainerComponent implements OnInit, OnDestroy {
   public filterItem$: Observable<FilterEntityModel>;
 
   private destroy$ = new Subject();
@@ -35,24 +34,21 @@ export class FiltersItemContainerComponent
 
   public ngOnInit(): void {
     const id: string = this.activatedRoute.snapshot.params.id;
-    this.filterEntitiesService.triggerLoad();
 
     this.filterItem$ = id
       ? this.filterEntitiesService.entities$.pipe(
           map(selectEntityByIdFactory(id))
         )
       : of(null);
+
+    this.filterItem$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(this.registerHeader.bind(this));
   }
 
   public ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
-  }
-
-  public ngAfterViewInit(): void {
-    this.filterItem$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(this.registerHeader.bind(this));
   }
 
   public onSave(item: FilterEntityModel): void {
@@ -63,13 +59,10 @@ export class FiltersItemContainerComponent
 
   private registerHeader(item: FilterEntityModel | null): void {
     if (item) {
-      // Investigate why header is not applied in sync way
-      setTimeout(() => {
-        this.headerService.headerTitle$.next(
-          this.nameLanguagePipe.transform(item.name)
-        );
-        this.headerService.headerIcon$.next('alternate_email');
-      });
+      this.headerService.headerTitle$.next(
+        this.nameLanguagePipe.transform(item.name)
+      );
+      this.headerService.headerIcon$.next('alternate_email');
     }
   }
 }

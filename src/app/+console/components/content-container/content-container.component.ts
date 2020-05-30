@@ -1,6 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 
-import { HeaderService } from '@console-shared/services';
+import {
+  HeaderService,
+  FilterEntitiesService,
+  IntentsService,
+} from '@console-shared/services';
+import { observeOn } from 'rxjs/operators';
+import { asyncScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-content-container',
@@ -9,8 +15,23 @@ import { HeaderService } from '@console-shared/services';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContentContainerComponent {
-  public headerText$ = this.headerService.headerTitle$;
-  public headerIcon$ = this.headerService.headerIcon$;
+  public headerText$ = this.headerService.headerTitle$.pipe(
+    observeOn(asyncScheduler)
+  );
+  public headerIcon$ = this.headerService.headerIcon$.pipe(
+    observeOn(asyncScheduler)
+  );
 
-  constructor(private headerService: HeaderService) {}
+  constructor(
+    private headerService: HeaderService,
+    private filterEntitiesService: FilterEntitiesService,
+    private intentsService: IntentsService
+  ) {
+    this.initData();
+  }
+
+  private initData(): void {
+    this.filterEntitiesService.triggerLoad();
+    this.intentsService.triggerLoad();
+  }
 }

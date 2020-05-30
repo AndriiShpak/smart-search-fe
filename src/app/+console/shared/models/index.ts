@@ -7,3 +7,5 @@ export * from './intent/intents.model';
 export * from './intent/training-phrase-part.model';
 export * from './intent/training-phrase.model';
 export * from './intent/intents-state.model';
+export * from './query-result.model';
+export * from './query-display.model';

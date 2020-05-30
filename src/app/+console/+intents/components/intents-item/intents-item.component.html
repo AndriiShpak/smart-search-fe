@@ -3,6 +3,7 @@
 </button>
 
 <app-intents-entities-list
+  *ngIf="filterEntities.length"
   class="intents-item__entities-list-container"
   [filterEntities]="filterEntities"
   [isSelectMode]="!!currentSelection"
@@ -10,7 +11,7 @@
 >
 </app-intents-entities-list>
 
-<div class="intents-item__training-container">
+<div class="intents-item__training-container" [class.intents-item__training-container--full-width]="!filterEntities.length">
     <div class="intents-item__heading">
     <h2>
       {{ 'intents.training-phrases.title' | translate }}

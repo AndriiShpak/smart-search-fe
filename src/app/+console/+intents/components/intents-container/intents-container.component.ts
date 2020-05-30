@@ -23,7 +23,6 @@ export class IntentsContainerComponent implements OnInit {
 
   public ngOnInit(): void {
     this.registerHeader();
-    this.intentsService.triggerLoad();
     this.intents$ = this.intentsService.intents$.pipe(map(selectIntentsList));
   }
 

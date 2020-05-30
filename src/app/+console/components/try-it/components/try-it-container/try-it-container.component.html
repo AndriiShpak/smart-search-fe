@@ -1,3 +1,12 @@
-<app-query-input></app-query-input>
-<!-- add logic and condition to display try-it-result component -->
-<app-try-it-placeholder></app-try-it-placeholder>
+<app-query-input (search)="onSearch($event)"></app-query-input>
+
+<app-try-it-result
+  *ngIf="queryResult$ | async as queryResult; else placeholder"
+  [queryResult]="queryResult"
+>
+
+</app-try-it-result>
+
+<ng-template #placeholder>
+  <app-try-it-placeholder></app-try-it-placeholder>
+</ng-template>

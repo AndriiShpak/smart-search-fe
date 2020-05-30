@@ -1,4 +1,6 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
+
+import { QueryDisplayModel } from '@console-shared/models';
 
 @Component({
   selector: 'app-try-it-result',
@@ -6,4 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./try-it-result.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TryItResultComponent {}
+export class TryItResultComponent {
+  @Input()
+  queryResult: QueryDisplayModel;
+}

@@ -19,6 +19,7 @@ import { IntentModel, FilterEntityModel } from '@console-shared/models';
 import {
   selectIntentByIdFactory,
   selectEntitiesByGroupFactory,
+  filterEntitiesReadyForSearch,
 } from '@console-shared/utils';
 import { NameLanguagePipe } from '@console-shared/pipes';
 
@@ -28,8 +29,7 @@ import { NameLanguagePipe } from '@console-shared/pipes';
   styleUrls: ['./intents-item-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IntentsItemContainerComponent
-  implements OnInit, AfterViewInit, OnDestroy {
+export class IntentsItemContainerComponent implements OnInit, OnDestroy {
   public intent: IntentModel;
   public filterEntities$: Observable<FilterEntityModel[]>;
 
@@ -45,16 +45,6 @@ export class IntentsItemContainerComponent
   ) {}
 
   public ngOnInit(): void {
-    const id: string = this.activatedRoute.snapshot.params.id;
-    this.intentsService.triggerLoad();
-    this.filterEntityService.triggerLoad();
-
-    if (id) {
-      this.setupIntent(id);
-    }
-  }
-
-  public ngAfterViewInit(): void {
     const id: string = this.activatedRoute.snapshot.params.id;
 
     if (id) {
@@ -85,7 +75,8 @@ export class IntentsItemContainerComponent
         this.intent = intent;
         this.registerHeader(intent);
         this.filterEntities$ = this.filterEntityService.entities$.pipe(
-          map(selectEntitiesByGroupFactory(intent.name.system))
+          map(selectEntitiesByGroupFactory(intent.name.system)),
+          map(filterEntitiesReadyForSearch)
         );
         this.cd.markForCheck();
       });

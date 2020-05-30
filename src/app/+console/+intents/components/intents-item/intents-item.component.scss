@@ -20,6 +20,10 @@
 
   &__training-container {
     width: 65%;
+
+    &--full-width {
+      width: 100%;
+    }
   }
 
   &__action-button {

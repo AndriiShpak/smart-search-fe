@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 @Component({
   selector: 'app-query-input',
@@ -6,4 +11,11 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./query-input.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QueryInputComponent {}
+export class QueryInputComponent {
+  @Output()
+  search: EventEmitter<string> = new EventEmitter();
+
+  public onEnterKey(query: string): void {
+    this.search.emit(query);
+  }
+}

@@ -1,0 +1,17 @@
+@import 'common.scss';
+
+:host {
+  display: block;
+  padding: 20px;
+}
+
+.result {
+  &__block {
+    margin: 30px 0;
+  }
+
+  &__block-label {
+    color: $grey-text;
+    margin-right: 20px;
+  }
+}

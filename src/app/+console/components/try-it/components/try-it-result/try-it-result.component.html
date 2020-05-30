@@ -1,1 +1,20 @@
-<p>try-it-result works!</p>
+<ng-container *ngIf="queryResult.intent; else noResults">
+  <div class="result__block">
+    <span class="result__block-label"> Intent: </span>
+    {{ queryResult.intent.name | nameLanguage }}
+  </div>
+  <mat-divider></mat-divider>
+
+  <div *ngFor="let parameter of queryResult.parameters" class="result__block">
+    <span class="result__block-label"> {{ parameter.entity.name | nameLanguage }}: </span>
+    [
+    <ng-container *ngFor="let paramValue of parameter.values; let last = last">
+      {{paramValue}} <ng-container *ngIf='!last'>,</ng-container>
+    </ng-container>
+    ]
+  </div>
+</ng-container>
+
+<ng-template #noResults>
+  No matching intent
+</ng-template>

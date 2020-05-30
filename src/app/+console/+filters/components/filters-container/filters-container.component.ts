@@ -34,8 +34,6 @@ export class FiltersContainerComponent implements OnInit {
 
   public ngOnInit(): void {
     this.registerHeader();
-    this.filterEntitiesService.triggerLoad();
-    this.intentsService.triggerLoad();
     this.intentsWithEntities$ = combineLatest([
       this.intentsService.intents$.pipe(
         filter((intents) => !!intents),
